@@ -95,26 +95,31 @@ A comprehensive full-stack healthcare application that leverages AI-powered voic
 ## 🔍 Detailed Component Interaction Flow
 
 ### 1. **User Authentication Flow**
+
 ```
 User Input (Email/Password) → FastAPI Login Endpoint → PostgreSQL sp_login_user → JWT Token/Session
 ```
 
 ### 2. **Voice Processing Pipeline**
+
 ```
 Microphone → Web Speech API → Text Conversion → Phrase Array → LangGraph Processing
 ```
 
 ### 3. **AI Analysis Workflow**
+
 ```
 Raw Symptoms → Gemini/GPT-4 → Normalized Symptoms → Specialist Mapping → Doctor Recommendations
 ```
 
 ### 4. **Database Integration Pattern**
+
 ```
 FastAPI Endpoints → PostgreSQL Stored Procedures → Data Retrieval → JSON Response → Frontend Display
 ```
 
 ### 5. **Appointment Booking Chain**
+
 ```
 Doctor Selection → Patient Details Fetch → Slot Validation → Appointment Creation → Payment Processing
 ```
@@ -145,6 +150,7 @@ Doctor Selection → Patient Details Fetch → Slot Validation → Appointment C
 ## 🌟 Overview
 
 This healthcare AI assistant streamlines the patient care journey by providing:
+
 - **Intelligent Voice Triage**: Natural language symptom collection and analysis
 - **AI-Powered Diagnosis**: Advanced symptom normalization and specialist recommendation
 - **Smart Doctor Matching**: Automated healthcare provider lookup based on specialization
@@ -156,21 +162,25 @@ This healthcare AI assistant streamlines the patient care journey by providing:
 ## ✨ Key Features
 
 ### 🎤 Voice-Enabled Interaction
+
 - Real-time speech-to-text conversion using Web Speech API
 - Natural language processing for symptom collection
 - Voice-guided patient triage workflow
 
 ### 🤖 AI-Powered Medical Intelligence
+
 - Integration with Gemini and GPT-4 for symptom analysis
 - LangGraph-based symptom normalization
 - Intelligent specialist mapping and recommendations
 
 ### 🏥 Healthcare Management
+
 - Comprehensive doctor database with specialization filtering
 - PostgreSQL-powered efficient data retrieval
 - Automated appointment scheduling system
 
 ### 💳 Payment Integration
+
 - Secure payment processing via Razorpay
 - Test mode support for development
 - Transaction management and tracking
@@ -236,6 +246,7 @@ healthcare-ai-assistant/
 ### 1. 🗄️ Database Setup
 
 #### Create Database and User
+
 ```bash
 psql -U postgres
 ```
@@ -248,6 +259,7 @@ GRANT ALL PRIVILEGES ON DATABASE healthcare TO fastapi_user;
 ```
 
 #### Initialize Schema and Functions
+
 ```bash
 psql -U fastapi_user -d healthcare -f sql/schema.sql
 ```
@@ -271,6 +283,7 @@ psql -U fastapi_user -d healthcare -f sql/functions/get_doctors_by_specialist.sq
 ### 2. 🔧 Backend Configuration
 
 #### Setup Virtual Environment
+
 ```bash
 cd backend
 ```
@@ -280,21 +293,25 @@ python -m venv venv
 ```
 
 **Windows:**
+
 ```bash
 venv\Scripts\activate
 ```
 
 **macOS/Linux:**
+
 ```bash
 source venv/bin/activate
 ```
 
 #### Install Dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
 #### Environment Configuration
+
 Create `.env` file in the `backend/` directory:
 
 ```env
@@ -314,6 +331,7 @@ GEMINI_API_KEY=your_gemini_api_key_here
 ```
 
 #### Start Backend Server
+
 ```bash
 uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
@@ -321,11 +339,13 @@ uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ### 3. 🎨 Frontend Setup
 
 #### Install Dependencies
+
 ```bash
 npm install
 ```
 
 #### Environment Configuration
+
 Create `.env.local` file in the root directory:
 
 ```env
@@ -338,6 +358,7 @@ VITE_RAZORPAY_KEY_ID=your_razorpay_key_id_here
 ```
 
 #### Start Development Server
+
 ```bash
 npm run dev
 ```
@@ -354,18 +375,21 @@ npm run dev
 ## 🔑 API Keys Setup
 
 ### OpenAI API Key
+
 1. Visit [OpenAI Platform](https://platform.openai.com/)
 2. Create an account and navigate to API Keys
 3. Generate a new secret key
 4. Add to backend `.env` file
 
 ### Google Gemini API Key
+
 1. Go to [Google AI Studio](https://makersuite.google.com/)
 2. Create a new project or select existing
 3. Generate API key
 4. Add to both backend `.env` and frontend `.env.local`
 
 ### Razorpay Configuration
+
 1. Sign up at [Razorpay Dashboard](https://dashboard.razorpay.com/)
 2. Switch to Test Mode for development
 3. Copy API keys from Settings > API Keys
@@ -385,11 +409,13 @@ npm run dev
 ## 🧪 Testing
 
 ### Backend API Testing
+
 ```bash
 curl http://localhost:8000/health
 ```
 
 ### Database Connection Testing
+
 ```bash
 python -c "from backend.db.connection import get_db_connection; print('DB Connected!' if get_db_connection() else 'DB Connection Failed!')"
 ```
@@ -399,11 +425,13 @@ python -c "from backend.db.connection import get_db_connection; print('DB Connec
 ## 🚀 Deployment
 
 ### Backend Deployment
+
 - Configure production database credentials
 - Set up environment variables on hosting platform
 - Deploy using platforms like Heroku, Railway, or DigitalOcean
 
 ### Frontend Deployment
+
 - Build production bundle: `npm run build`
 - Deploy to Vercel, Netlify, or similar platforms
 - Update CORS settings in backend for production domain
@@ -429,6 +457,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🆘 Support
 
 For support and questions:
+
 - Create an issue in the GitHub repository
 - Check existing documentation and FAQs
 - Review the troubleshooting section below
@@ -440,16 +469,19 @@ For support and questions:
 ### Common Issues
 
 **Database Connection Error**
+
 - Verify PostgreSQL is running
 - Check database credentials in `.env`
 - Ensure database and user exist
 
 **Voice Recognition Not Working**
+
 - Use HTTPS or localhost only
 - Check browser microphone permissions
 - Verify Web Speech API support
 
 **API Key Errors**
+
 - Validate API keys are correctly set
 - Check for trailing spaces or quotes
 - Verify API key permissions and quotas
