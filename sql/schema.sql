@@ -1,10 +1,10 @@
----------------create
+CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(100) NOT NULL
+);
 
-INSERT INTO users (email, password)
-VALUES 
-('john@google.com', 'user2')
-
-CREATE TABLE patients (
+CREATE TABLE IF NOT EXISTS patients (
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     name VARCHAR(100) NOT NULL,
@@ -17,8 +17,7 @@ CREATE TABLE patients (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-
-CREATE TABLE patient_history (
+CREATE TABLE IF NOT EXISTS patient_history (
     id SERIAL PRIMARY KEY,
     patient_id INT NOT NULL REFERENCES patients(id) ON DELETE CASCADE,
     past_diagnoses TEXT,
@@ -30,8 +29,7 @@ CREATE TABLE patient_history (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-
-CREATE TABLE hospitals (
+CREATE TABLE IF NOT EXISTS hospitals (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     address TEXT,
@@ -39,8 +37,7 @@ CREATE TABLE hospitals (
     website TEXT
 );
 
-
-CREATE TABLE doctors (
+CREATE TABLE IF NOT EXISTS doctors (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     specialization VARCHAR(100) NOT NULL,
@@ -49,9 +46,7 @@ CREATE TABLE doctors (
     hospital_id INTEGER REFERENCES hospitals(id) ON DELETE SET NULL
 );
 
-
-
-CREATE TABLE availability_slots (
+CREATE TABLE IF NOT EXISTS availability_slots (
     id SERIAL PRIMARY KEY,
     doctor_id INT NOT NULL REFERENCES doctors(id) ON DELETE CASCADE,
     available_date DATE NOT NULL,
@@ -61,18 +56,16 @@ CREATE TABLE availability_slots (
     CHECK (start_time < end_time)
 );
 
-
-CREATE TABLE reviews (
+CREATE TABLE IF NOT EXISTS reviews (
     id SERIAL PRIMARY KEY,
     doctor_id INT NOT NULL REFERENCES doctors(id) ON DELETE CASCADE,
     patient_id INT NOT NULL REFERENCES patients(id) ON DELETE CASCADE,
-    rating DECIMAL(3, 2) NOT NULL CHECK (rating >= 0 AND rating <= 5),
+    rating DECIMAL(3,2) NOT NULL CHECK (rating >= 0 AND rating <= 5),
     comment TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-
-CREATE TABLE appointments (
+CREATE TABLE IF NOT EXISTS appointments (
     id SERIAL PRIMARY KEY,
     patient_id INT NOT NULL REFERENCES patients(id) ON DELETE CASCADE,
     doctor_id INT NOT NULL REFERENCES doctors(id) ON DELETE CASCADE,
@@ -82,7 +75,7 @@ CREATE TABLE appointments (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE visits (
+CREATE TABLE IF NOT EXISTS visits (
     id SERIAL PRIMARY KEY,
     patient_id INT NOT NULL REFERENCES patients(id) ON DELETE CASCADE,
     doctor_id INT NOT NULL REFERENCES doctors(id) ON DELETE CASCADE,
@@ -92,38 +85,18 @@ CREATE TABLE visits (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-
-CREATE TABLE specialists (
+CREATE TABLE IF NOT EXISTS specialists (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL
 );
 
-CREATE TABLE symptoms (
+CREATE TABLE IF NOT EXISTS symptoms (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL
 );
 
-CREATE TABLE specialist_symptom (
+CREATE TABLE IF NOT EXISTS specialist_symptom (
     specialist_id INT REFERENCES specialists(id),
     symptom_id INT REFERENCES symptoms(id),
     PRIMARY KEY (specialist_id, symptom_id)
 );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

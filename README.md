@@ -190,7 +190,7 @@ This healthcare AI assistant streamlines the patient care journey by providing:
 ## 🛠️ Technology Stack
 
 | Component | Technology | Purpose |
-|-----------|------------|---------|
+| ----------- | ------------ | --------- |
 | **Frontend** | React, CSS, JavaScript | User interface and voice interactions |
 | **Backend** | FastAPI, Python | API services and business logic |
 | **AI/ML** | Gemini, GPT-4, LangGraph | Natural language processing and AI agents |
@@ -468,19 +468,19 @@ For support and questions:
 
 ### Common Issues
 
-**Database Connection Error**
+#### Database Connection Error**
 
 - Verify PostgreSQL is running
 - Check database credentials in `.env`
 - Ensure database and user exist
 
-**Voice Recognition Not Working**
+#### Voice Recognition Not Working
 
 - Use HTTPS or localhost only
 - Check browser microphone permissions
 - Verify Web Speech API support
 
-**API Key Errors**
+#### API Key Errors
 
 - Validate API keys are correctly set
 - Check for trailing spaces or quotes
